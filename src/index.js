@@ -39,16 +39,33 @@ class ProductTable extends React.Component {
 
 		const rows = []
 		let lastcategory = null
-
+		
 		this.props.products.forEach((product) => {
-			//forEach loops through all the elements of an array/object. Similar to for loop but its better than for loop since we dont have to know the number of elements etc, it starts from the first and ends at the end element without specifying anything extra.
-
-			const price_dollar = product.price
-			let price = price_dollar.substr(1)
-			console.log(price)
-
-					//football                      //''  = 0
-			if (product.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) {
+			//forEach loops through all the elements of an array/object. Similar to for loop but its better than for loop since we dont have to know the number of elements etc, it starts from the first and ends at the end element without specifying anything extra.	
+			// let price_dollar = product.price
+			// let price = price_dollar.substr(1)
+			if ( (filterText.includes('<')) ){
+				let new_filterText = parseInt(filterText.substr(1))
+				let dollar_price = product.price
+				let just_price = parseInt(dollar_price.substr(1))
+				if (just_price > new_filterText ) {
+					console.log(parseInt(product.price) < parseInt(new_filterText))
+					return
+				}
+			} else if ((filterText.includes('>'))) {
+				let new_filterText = parseInt(filterText.substr(1))
+				let dollar_price = product.price
+				let just_price = parseInt(dollar_price.substr(1))
+				if (just_price < new_filterText ) {
+					return
+				}
+			}
+			
+			else if 
+ 				 (
+				(product.name.toLowerCase().indexOf(filterText.toLowerCase()) === -1) &&
+				(product.price.indexOf(filterText) === -1 )
+				)	{
 				// console.log(product.name.toLowerCase().indexOf(filterText.toLowerCase()))
 					return 
 				//indexOf will return the first index at which it finds a what we type
